@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StrongBase Fitness | Local Gym Website Demo</title>
+    <meta
+      name="description"
+      content="A simple, trustworthy, local-style gym website demo for owners who want an affordable and professional web presence."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #5b6472;
+        --primary: #1d4ed8;
+        --primary-dark: #143ea9;
+        --border: #e5e7eb;
+        --shadow: 0 14px 40px rgba(17, 24, 39, 0.08);
+        --radius: 22px;
+        --container: 1120px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      .container {
+        width: min(calc(100% - 32px), var(--container));
+        margin: auto;
+      }
+      .section {
+        padding: 82px 0;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-weight: 800;
+        transition: 0.25s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 12px 28px rgba(29, 78, 216, 0.22);
+      }
+      .btn-secondary {
+        background: #fff;
+        border: 1px solid var(--border);
+      }
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(245, 247, 251, 0.88);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        z-index: 1000;
+      }
+      .nav {
+        min-height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .logo {
+        font-weight: 900;
+        font-size: 1.12rem;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 22px;
+        font-weight: 700;
+        color: #334155;
+      }
+      .menu-btn {
+        display: none;
+        border: 1px solid var(--border);
+        background: #fff;
+        border-radius: 14px;
+        width: 46px;
+        height: 46px;
+      }
+      .hero {
+        padding: 74px 0 52px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #dbeafe;
+        color: #1e3a8a;
+        font-weight: 800;
+        font-size: 0.85rem;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-size: clamp(2.7rem, 6vw, 4.8rem);
+        line-height: 0.98;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        margin-bottom: 18px;
+      }
+      .lead {
+        font-size: 1.04rem;
+        color: var(--muted);
+        margin-bottom: 26px;
+        max-width: 620px;
+      }
+      .hero-card {
+        background:
+          linear-gradient(rgba(17, 24, 39, 0.2), rgba(17, 24, 39, 0.62)),
+          url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1200&q=80")
+            center/cover;
+        border-radius: 30px;
+        min-height: 500px;
+        box-shadow: var(--shadow);
+        padding: 24px;
+        display: flex;
+        align-items: end;
+        color: #fff;
+      }
+      .mini-offer {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 18px;
+        border-radius: 20px;
+        max-width: 360px;
+      }
+      .mini-offer h3 {
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+      .card h3 {
+        margin: 14px 0 8px;
+        font-size: 1.2rem;
+      }
+      .icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        background: #dbeafe;
+        color: #1d4ed8;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+      }
+      .title {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin-bottom: 12px;
+      }
+      .sub {
+        color: var(--muted);
+        max-width: 720px;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        align-items: center;
+      }
+      .photo {
+        min-height: 420px;
+        border-radius: 28px;
+        background: url("https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80")
+          center/cover;
+        box-shadow: var(--shadow);
+      }
+      .list {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .list-item {
+        display: flex;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .check {
+        min-width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 900;
+      }
+      .plans {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .plan {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .plan-price {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+      .plan ul {
+        list-style: none;
+        display: grid;
+        gap: 10px;
+        color: #334155;
+      }
+      .plan li::before {
+        content: "✓";
+        color: var(--primary);
+        font-weight: 900;
+        margin-right: 10px;
+      }
+      .testimonial p {
+        color: #334155;
+        margin-bottom: 16px;
+      }
+      .person {
+        font-weight: 800;
+      }
+      .contact {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 22px;
+      }
+      .field {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .contact-form {
+        display: grid;
+        gap: 14px;
+      }
+      .success {
+        display: none;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 700;
+      }
+      .floating {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        display: grid;
+        gap: 10px;
+        z-index: 1000;
+      }
+      .fab {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 900;
+        box-shadow: var(--shadow);
+      }
+      .wa {
+        background: #25d366;
+      }
+      .call {
+        background: var(--primary);
+      }
+      .footer {
+        padding: 26px 0 36px;
+        color: var(--muted);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      @media (max-width: 900px) {
+        .hero-grid,
+        .two-col,
+        .contact,
+        .grid-3,
+        .plans {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        .menu-btn {
+          display: block;
+        }
+        .header.open .nav-links {
+          display: flex;
+          position: absolute;
+          top: 78px;
+          left: 16px;
+          right: 16px;
+          flex-direction: column;
+          background: #fff;
+          padding: 18px;
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          box-shadow: var(--shadow);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header" id="header">
+      <div class="container nav">
+        <a href="#home" class="logo">StrongBase Fitness</a>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <a href="#contact" class="btn btn-primary">Get Demo</a
+          ><button class="menu-btn" id="menuBtn">☰</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">Website Demo For Gyms</div>
+            <h1>A simple website that helps bring more gym inquiries.</h1>
+            <p class="lead">
+              Many people search online before visiting a gym. A clean website
+              helps your gym look active, professional, and easy to contact,
+              which can increase trust and improve the chance of getting new
+              members.
+            </p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap">
+              <a href="#contact" class="btn btn-primary">Book Free Trial</a
+              ><a href="#pricing" class="btn btn-secondary">See Plans</a>
+            </div>
+          </div>
+          <div class="hero-card reveal">
+            <div class="mini-offer">
+              <h3>New Member Offer</h3>
+              <p>Free trial + trainer consultation + body assessment</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="services">
+        <div class="container">
+          <h2 class="title reveal">
+            Everything a normal gym owner needs on a website.
+          </h2>
+          <p class="sub reveal">
+            <!-- This version is best for smaller or mid-range gyms. It feels
+            trustworthy, clean. -->
+          </p>
+          <div class="grid-3" style="margin-top: 28px">
+            <article class="card reveal">
+              <div class="icon">🏋️</div>
+              <h3>Show plans and offers clearly</h3>
+              <p>
+                Let people quickly understand your membership options and
+                services.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="icon">💬</div>
+              <h3>WhatsApp Contact</h3>
+              <p>
+                Phone, WhatsApp, location, and contact form make it easy for
+                people to inquire anytime.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="icon">📍</div>
+              <h3>Location & Hours</h3>
+              <p>
+                Help nearby customers find the gym faster and trust the business
+                more.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container two-col">
+          <div class="photo reveal"></div>
+          <div class="card reveal">
+            <h2 class="title" style="font-size: clamp(2rem, 4vw, 3rem)">
+              Simple design. Better first impression.
+            </h2>
+            <p class="sub">
+              A clean gym website helps people understand your services, trust
+              your gym faster, and contact you more easily. It gives your
+              business a stronger online presence without making things
+              complicated.
+            </p>
+            <div class="list">
+              <div class="list-item">
+                <div class="check">✓</div>
+                <div>
+                  <strong>Clear pricing</strong>
+                  <p>People can quickly see membership options.</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="check">✓</div>
+                <div>
+                  <strong>Real gym photos</strong>
+                  <p>Photos help owners look established and trustworthy.</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="check">✓</div>
+                <div>
+                  <strong>Direct lead capture</strong>
+                  <p>Call, WhatsApp, and inquiry form in one place.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="pricing">
+        <div class="container">
+          <h2 class="title reveal">
+            Membership plans that are easy to understand.
+          </h2>
+          <div class="plans" style="margin-top: 28px">
+            <article class="card plan reveal">
+              <h3>Basic</h3>
+              <div class="plan-price">Rs. 3,000</div>
+              <ul>
+                <li>Full gym access</li>
+                <li>General guidance</li>
+                <li>Locker access</li>
+              </ul>
+              <a href="#contact" class="btn btn-secondary">Choose Plan</a>
+            </article>
+            <article class="card plan reveal">
+              <h3>Standard</h3>
+              <div class="plan-price">Rs. 4,500</div>
+              <ul>
+                <li>Workout plan</li>
+                <li>Body assessment</li>
+                <li>Progress check</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary">Choose Plan</a>
+            </article>
+            <article class="card plan reveal">
+              <h3>Coaching</h3>
+              <div class="plan-price">Rs. 7,500</div>
+              <ul>
+                <li>Trainer support</li>
+                <li>Goal plan</li>
+                <li>Nutrition basics</li>
+              </ul>
+              <a href="#contact" class="btn btn-secondary">Choose Plan</a>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="reviews">
+        <div class="container">
+          <h2 class="title reveal">
+            Testimonials, see what our clients says about our gym.
+          </h2>
+          <div class="grid-3" style="margin-top: 28px">
+            <article class="card testimonial reveal">
+              <p>
+                “Friendly trainers, great environment, and very easy to stay
+                consistent.”
+              </p>
+              <div class="person">Aayush R.</div>
+            </article>
+            <article class="card testimonial reveal">
+              <p>
+                “Affordable and clean. I joined as a beginner and felt
+                comfortable from the start.”
+              </p>
+              <div class="person">Sneha P.</div>
+            </article>
+            <article class="card testimonial reveal">
+              <p>
+                “I like that I can just message on WhatsApp and get quick help.”
+              </p>
+              <div class="person">Bibek T.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="contact">
+        <div class="container contact">
+          <div class="card reveal">
+            <h2 class="title" style="font-size: clamp(2rem, 4vw, 3rem)">
+              Contact Us
+            </h2>
+            <p class="sub">
+              <!-- Replace this demo with the real gym name, photos, pricing,
+              location, and contact info. -->
+            </p>
+            <div class="list">
+              <div class="list-item">
+                <div class="check">☎</div>
+                <div>
+                  <strong>Phone</strong>
+                  <p>+977 98XXXXXXXX</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="check">💬</div>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <p>Fast replies for leads</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="check">📍</div>
+                <div>
+                  <strong>Address</strong>
+                  <p>Your gym location here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal">
+            <form id="form" class="contact-form">
+              <input class="field" placeholder="Full name" required /><input
+                class="field"
+                placeholder="Phone number"
+                required
+              /><input class="field" placeholder="Email" /><textarea
+                class="field"
+                placeholder="Your fitness goal"
+                style="min-height: 140px"
+              ></textarea
+              ><button class="btn btn-primary" type="submit">
+                Send Inquiry
+              </button>
+              <div class="success" id="success">
+                <!-- Inquiry captured. Connect this to WhatsApp, Formspree, or
+                Netlify Forms. -->
+                Inquiry sent! We will contact you soon.
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container">© 2026 StrongBase Fitness • Demo website gym.</div>
+    </footer>
+    <div class="floating">
+      <a class="fab wa" href="https://wa.me/9779813146485">WA</a
+      ><a class="fab call" href="tel:+9779813146485">📞</a>
+    </div>
+    <script>
+      const header = document.getElementById("header");
+      document
+        .getElementById("menuBtn")
+        ?.addEventListener("click", () => header.classList.toggle("open"));
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.14 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+      const form = document.getElementById("form");
+      const success = document.getElementById("success");
+      form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        form.reset();
+        success.style.display = "block";
+      });
+    </script>
+  </body>
+</html>
